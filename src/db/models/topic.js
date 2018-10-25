@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     Topic.hasMany(models.Banner, {
       foreignKey: "topicId",
       as: "banners",
+    }),
+    //HELP: comma or semicolon above?
+    Topic.hasMany(models.Rules, {
+      foreignKey: "ruleId",
+      as: "rules",
     });
   };
   return Topic;
