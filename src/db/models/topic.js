@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }),
     //HELP: comma or semicolon above?
     Topic.hasMany(models.Rules, {
-      foreignKey: "ruleId",
+      foreignKey: "topicId",
       as: "rules",
     });
   };
