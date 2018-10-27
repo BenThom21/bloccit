@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     //HELP: comma or semicolon above? and do I even need to 
     //re-associate here or just add rules in here somewhere?
     
-    Topic.hasMany(models.Rules, {
+    Topic.hasMany(models.Rule, {
       foreignKey: "topicId",
       as: "rules",
     });
