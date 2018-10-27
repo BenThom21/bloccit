@@ -9,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     Topic.hasMany(models.Banner, {
       foreignKey: "topicId",
       as: "banners",
-    }),
-    //HELP: comma or semicolon above?
+    });
+    //HELP: comma or semicolon above? and do I even need to 
+    //re-associate here or just add rules in here somewhere?
+    
     Topic.hasMany(models.Rules, {
       foreignKey: "topicId",
       as: "rules",

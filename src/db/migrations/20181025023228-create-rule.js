@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       //HELP: do we keep this the same?
-      ruleId: {
+      topicId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         references: {
