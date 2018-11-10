@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <main class="container">
+      <% include ../static/partials/navbar.ejs %>
+
+      <div class="card">
+        <div class="card-body">
+            <% ads.forEach((advertisement) => { %>
+                <h5 class="card-title"><%= advertisement.title %> </h5>
+                <p class="card-text">
+                    <%= advertisement.description %>
+                </p>
+            <% }) %>
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>
