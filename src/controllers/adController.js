@@ -27,8 +27,17 @@ module.exports = {
             } else {
                 res.redirect(303, `/advertisement/${advertisement.id}`)
             }
-        })
-    }
+        });
+    },
 
+    show(req, res, next) {
+        adQueries.getAd(req.params.id, (err, advertisement) => {
+            if(err || advertisement == null) {
+                res.redirect(404, "/");
+            } else {
+                res.render("advertisement/show", {advertisement});
+            }
+        });
+    }
 
 }

@@ -76,4 +76,16 @@ describe("routes : advertisement", () => {
         });
     });
 
+    describe("GET /advertisement/:id", () => {
+        it("should render a view with the selected ad", (done) => {
+            request.get(`${base}${this.advertisement.id}`, (err, res, body) => {
+                expect(err).toBeNull();
+                expect(body).toContain("Nike");
+                done();
+            });
+        });
+    });
+
+
+
 });
