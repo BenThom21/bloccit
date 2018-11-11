@@ -48,6 +48,26 @@ module.exports = {
                 res.redirect(303, "/ads")
             }
         });
+    },
+
+    edit(req, res, next) {
+        adQueries.getAd(req.params.id, (err, advertisement) => {
+            if(err || advertisement == null) {
+                res.redirect(404, "/");
+            } else {
+                res.render("ads/edit", {advertisement});
+            }
+        });
+    },
+
+    update(req, res, next) {
+        adQueries.updateAd(req.params.id, req.body, (err, advertisement) => {
+            if(err || advertisement == null) {
+                res.redirect(404, `/ads/${req.params.id}/edit`);
+            } else {
+                res.redirect(`/ads/${advertisement.id}`);
+            }
+        });
     }
 
 }
