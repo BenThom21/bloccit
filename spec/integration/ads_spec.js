@@ -25,20 +25,19 @@ describe("routes : advertisement", () => {
         });
     });
 
-    describe("GET /advertisement", () => {
-
+    describe("GET /ads", () => {
         it("should return a status code 200 and all ads", (done) => {
             request.get(base, (err, res, body) => {
                 expect(res.statusCode).toBe(200);
                 expect(err).toBeNull();
-                // expect(body).toContain("Ads");
-                // expect(body).toContain("Just do it");
+                expect(body).toContain("Ads");
+                expect(body).toContain("Just do it");
                 done();
             });
         });
     });
 
-    describe("GET /advertisement/new", () => {
+    describe("GET /ads/new", () => {
         it("should render a new ad card", (done) => {
             request.get(`${base}new`, (err, res, body) => {
                 expect(err).toBeNull();
@@ -48,7 +47,7 @@ describe("routes : advertisement", () => {
         });
     });
 
-    describe("POST /advertisement/create", () => {
+    describe("POST /ads/create", () => {
         const options = {
             url: `${base}create`,
             form: {
@@ -76,7 +75,7 @@ describe("routes : advertisement", () => {
         });
     });
 
-    describe("GET /advertisement/:id", () => {
+    describe("GET /ads/:id", () => {
         it("should render a view with the selected ad", (done) => {
             request.get(`${base}${this.advertisement.id}`, (err, res, body) => {
                 expect(err).toBeNull();
@@ -86,6 +85,23 @@ describe("routes : advertisement", () => {
         });
     });
 
+    describe("POST /ads/:id/destroy", () => {
+        it("should delete the ad with the associated id", (done) => {
+            Advertisement.all()
+            .then((advertisement) => {
+                const adCountBeforeDelete = advertisement.length;
+                expect(adCountBeforeDelete).toBe(1);
 
+                request.post(`${base}${this.advertisement.id}/destroy`, (err, res, body) => {
+                    Advertisement.all()
+                    .then((advertisement) => {
+                        expect(err).toBeNull();
+                        expect(advertisement.length).toBe(adCountBeforeDelete - 1);
+                        done();
+                    })
+                });
+            });
+        });
+    });
 
 });

@@ -13,7 +13,7 @@ module.exports = {
     },
     
     new(req, res, next) {
-        res.render("advertisement/new");
+        res.render("ads/new");
     },
 
     create(req, res, next) {
@@ -23,9 +23,9 @@ module.exports = {
         };
         adQueries.addAdvertisement(newAd, (err, advertisement) => {
             if(err) {
-                res.redirect(500, "/advertisement/new");
+                res.redirect(500, "/ads/new");
             } else {
-                res.redirect(303, `/advertisement/${advertisement.id}`)
+                res.redirect(303, `/ads/${advertisement.id}`)
             }
         });
     },
@@ -35,7 +35,17 @@ module.exports = {
             if(err || advertisement == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("advertisement/show", {advertisement});
+                res.render("ads/show", {advertisement});
+            }
+        });
+    },
+
+    destroy(req, res, next) {
+        adQueries.deleteAd(req.params.id, (err, advertisement) => {
+            if(err) {
+                res.redirect(500, `/ads/${advertisement.id}`)
+            } else {
+                res.redirect(303, "/ads")
             }
         });
     }

@@ -33,6 +33,18 @@ module.exports = {
         .catch((err) => {
             callback(err);
         })
+    },
+
+    deleteAd(id, callback) {
+        return Advertisement.destroy({
+            where: {id}
+        })
+        .then((advertisement) => {
+            callback(null, advertisement);
+        })
+        .catch((err) => {
+            callback(err);
+        })
     }
 
 }
