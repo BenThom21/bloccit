@@ -31,6 +31,7 @@ describe("routes : advertisement", () => {
                 expect(res.statusCode).toBe(200);
                 expect(err).toBeNull();
                 expect(body).toContain("Ads");
+                console.log(body);
                 expect(body).toContain("Just do it");
                 done();
             });
@@ -80,6 +81,7 @@ describe("routes : advertisement", () => {
             request.get(`${base}${this.advertisement.id}`, (err, res, body) => {
                 expect(err).toBeNull();
                 expect(body).toContain("Nike");
+                console.log(body);
                 done();
             });
         });
