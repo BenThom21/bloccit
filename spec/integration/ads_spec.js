@@ -1,6 +1,6 @@
 const request = require("request");
 const server = require("../../src/server");
-const base = "http://localhost:3000/advertisement/";
+const base = "http://localhost:3000/ads/";
 
 const sequelize = require("../../src/db/models/index").sequelize;
 const Advertisement = require("../../src/db/models").Advertisement;
@@ -87,13 +87,13 @@ describe("routes : advertisement", () => {
 
     describe("POST /ads/:id/destroy", () => {
         it("should delete the ad with the associated id", (done) => {
-            Advertisement.all()
+            Advertisement.findAll()
             .then((advertisement) => {
                 const adCountBeforeDelete = advertisement.length;
                 expect(adCountBeforeDelete).toBe(1);
 
                 request.post(`${base}${this.advertisement.id}/destroy`, (err, res, body) => {
-                    Advertisement.all()
+                    Advertisement.findAll()
                     .then((advertisement) => {
                         expect(err).toBeNull();
                         expect(advertisement.length).toBe(adCountBeforeDelete - 1);
