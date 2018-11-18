@@ -1,5 +1,6 @@
 const Topic = require("./models").Topic;
 const Post = require("./models").Post;
+const Flair = require("./models").Flair;
 
 module.exports = {
 
@@ -20,6 +21,13 @@ module.exports = {
             include: [{
                 model: Post,
                 as: "posts"
+            }]
+        })
+        //Assignment 9 - iffy about this one
+        return Topic.findById(id, {
+            include: [{
+                model: Flair,
+                as: "flairs"
             }]
         })
         .then((topic) => {
