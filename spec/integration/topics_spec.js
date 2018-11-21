@@ -140,4 +140,31 @@ describe("routes : topics", () => {
         });
     });
 
+    // //Assignment 10 - assignment work
+    // //update below
+    // it("should not create a new topic that fails validations", (done) => {/* spec implementation */});
+
+    // it("should not create a new topic that fails validations", (done) => {
+    //     const options = {
+    //         url: `${base}/${this.topic.id}/topics/create`,
+    //         form: {
+    //             title: "a",
+    //             body: "b"
+    //         }
+    //     };
+
+    //     request.post(options, (err, res, body) => {
+    //             Topic.findOne({where: {title: "a"}})
+    //             .then((topic) => {
+    //                 expect(topic).toBeNull();
+    //                 done();
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err);
+    //                 done();
+    //             });
+    //         }
+    //     );
+    // });
+
 });
