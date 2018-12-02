@@ -148,7 +148,7 @@ describe("routes : posts", () => {
             request.post(options, (err, res, body) => {
                 expect(err).toBeNull();
 
-                Post.findOne({
+                Post.findOne( {
                     where: {id: this.post.id}
                 })
                 .then((post) => {

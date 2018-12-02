@@ -23,9 +23,9 @@ module.exports = {
         });
     },
 
-    show(req, res, next){
+    show(req, res, next) {
         postQueries.getPost(req.params.id, (err, post) => {
-            if(err || post == null){
+            if(err || post == null) {
                 res.redirect(404, "/");
             } else {
                 res.render("posts/show", {post});
@@ -33,9 +33,9 @@ module.exports = {
         });
     },
 
-    destroy(req, res, next){
+    destroy(req, res, next) {
         postQueries.deletePost(req.params.id, (err, deletedRecordsCount) => {
-            if(err){
+            if(err) {
                 res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
             } else {
                 res.redirect(303, `/topics/${req.params.topicId}`)
