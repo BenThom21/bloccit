@@ -25,6 +25,7 @@ module.exports = {
             req.redirect("/users/sign_in");
         }
     },
+    
     destroy(req, res, next) {
         commentQueries.deleteComment(req, (err, comment) => {
             if(err) {

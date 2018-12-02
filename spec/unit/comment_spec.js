@@ -88,13 +88,7 @@ describe("Comment", () => {
                 body: "Are the inertial dampers still engaged?"
             })
             .then((comment) => {
-
-                // the code in this block will not be evaluated since the validation error
-                // will skip it. Instead, we'll catch the error in the catch block below
-                // and set the expectations there
-
                 done();
-
             })
             .catch((err) => {
                 expect(err.message).toContain("Comment.userId cannot be null");

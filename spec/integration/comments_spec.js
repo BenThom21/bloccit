@@ -68,8 +68,8 @@ describe("routes : comments", () => {
 
   //test suites will go there
 
-  //GUEST user
-  describe("guest attempting to perform CRUD actions for Comment", () => {
+    //GUEST user
+    describe("guest attempting to perform CRUD actions for Comment", () => {
         beforeEach((done) => {    // before each suite in this context
             request.get({           // mock authentication
                 url: "http://localhost:3000/auth/fake",
@@ -186,6 +186,33 @@ describe("routes : comments", () => {
                 })
             });
         });
+
+        //assignment 13 tests here since both test cases must be signed in
+        //Do I need a beforeEach with an admin user to make sure this works or what?
+        describe("POST /topics/:topicId/posts/:postId/comments/:id/destroy", () => {
+            it("should only allow admins to delete comments, not members", (done) => {
+                Comment.all()
+                .then((comments) => {
+                    const commentCountBeforeDelete = comments.length;
+
+                    expect(commentCountBeforeDelete).toBe(1);
+                    //does this make sense?
+                    if(this.user.role == "admin") {
+                        request.post( `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`, (err, res, body) => {
+                            expect(res.statusCode).toBe(302);
+                            Comment.all()
+                            .then((comments) => {
+                                expect(err).toBeNull();
+                                expect(comments.length).toBe(commentCountBeforeDelete - 1);
+                                done();
+                            })
+                        });  
+                    }
+
+                })
+            });
+        });
+
     });
 
 
