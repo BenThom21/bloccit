@@ -23,34 +23,49 @@ module.exports = {
         })
     },
 
-    deletePost(id, callback) {
-        return Post.destroy({
-            where: { id }
-        })
-        .then((deletedRecordsCount) => {
-            callback(null, deletedRecordsCount);
+    deletePost(req, callback){
+        return Post.findById(req.params.id)
+        .then((post) => {
+            const authorized = new Authorizer(req.user, post).destroy();
+    
+            if(authorized) {
+                post.destroy()
+                .then((res) => {
+                    callback(null, post);
+                });
+                
+            } else {
+                req.flash("notice", "You are not authorized to do that.")
+                callback(401);
+            }
         })
         .catch((err) => {
             callback(err);
-        })
+        });
     },
 
-    updatePost(id, updatedPost, callback) {
-        return Post.findById(id)
+    updatePost(req, updatedPost, callback){
+        return Post.findById(req.params.id)
         .then((post) => {
-            if(!post) {
+            if(!post){
                 return callback("Post not found");
             }
+            const authorized = new Authorizer(req.user, post).update();
 
-            post.update(updatedPost, {
-                fields: Object.keys(updatedPost)
-            })
-            .then(() => {
-                callback(null, post);
-            })
-            .catch((err) => {
-                callback(err);
-            });
+            if(authorized) {
+                post.update(updatedPost, {
+                    fields: Object.keys(updatedPost)
+                })
+                .then(() => {
+                    callback(null, post);
+                })
+                .catch((err) => {
+                    callback(err);
+                });
+            } else {
+                req.flash("notice", "You are not authorized to do that.");
+                callback("Forbidden");
+            }
         });
     }
 
