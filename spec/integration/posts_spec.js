@@ -182,15 +182,11 @@ describe("routes : posts", () => {
             });
         });
 
-        describe("member user performing CRUD actions for Post", () => {
-            beforeEach((done) => {
-                request.get({
-                    url: "http://localhost:3000/auth/fake",
-                    form: {
-                        role: "member"
-                    }
-                },
-                (err, res, body) => {
+                Post.findOne( {
+                    where: {id: this.post.id}
+                })
+                .then((post) => {
+                    expect(post.title).toBe("Snowman Building Competition");
                     done();
                 }
                 );

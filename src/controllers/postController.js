@@ -5,10 +5,6 @@ const Authorizer = require("../policies/post");
 
 module.exports = {
 
-    // new(req, res, next) {
-    //     res.render("posts/new", {topicId: req.params.topicId});
-    // },
-
     new(req, res, next) {
         const authorized = new Authorizer(req.user).new();
     
@@ -53,9 +49,9 @@ module.exports = {
     },
 
     destroy(req, res, next) {
-        postQueries.deletePost(req, (err, post) => {
-            if(err){
-                res.redirect(err, `/posts/${req.params.id}`)
+        postQueries.deletePost(req.params.id, (err, deletedRecordsCount) => {
+            if(err) {
+                res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
             } else {
                 res.redirect(303, "/posts")
             }
