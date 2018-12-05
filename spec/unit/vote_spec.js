@@ -63,7 +63,7 @@ describe("Vote", () => {
     });
 
 
-    
+
     describe("#create()", () => {
         it("should create an upvote on a post for a user", (done) => {
             Vote.create({
@@ -197,7 +197,6 @@ describe("Vote", () => {
                 });
             });
         });
-   
     });
    
     describe("#getPost()", () => {
@@ -219,7 +218,97 @@ describe("Vote", () => {
                 done();
             });
         });
-   
     });
+
+    //assignment 14
+    describe("#voteValue()", () => {
+        it("should only let values be 1 or -1", (done) => {
+            Vote.create({
+                value: 1
+            })
+            .then((vote) => {
+                expect(vote.value).toBe(1 || -1);
+                done();
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+        });
+    });
+
+
+    describe("#oneVote()", () => {
+        it("should only allow one vote per user per post", (done) => {
+            Vote.create({
+                value: 1,
+                userId: this.user.id,
+                postId: this.post.id
+            })
+            .then((vote) => {
+                vote.getUser()
+                .then((user) => {
+                    expect(user.id).toBe(this.user.id);
+                    this.user.getPost()
+                    .then((associatedPost) => {
+                        expect(associatedPost.id).toBe(this.post.id);
+                    })                    
+                    done();
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+        });
+    });
+
+
+    describe("#getPoints()", () => {
+        it("should return the total points associated with a post", (done) => {
+            Vote.create({
+                value: 1,
+                userId: this.user.id,
+                postId: this.post.id
+            })
+            .then((vote) => {
+                this.comment.getPost()
+                .then((associatedPost) => {
+                    return associatedPost.vote.value;
+                    done();
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+        });
+    });
+
+    describe("#hasUpvoteFor()", () => {
+        it("should return true if matching user upvoted the post", (done) => {
+            Vote.create({ 
+                value: 1,
+                postId: this.post.id,
+                userId: this.user.id
+            })
+            .then((vote) => {
+                this.comment.getPost()
+                .then((associatedPost) => {
+                    expect(associatedPost.title).toBe("My first visit to Proxima Centauri b");
+                    done();
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                done();
+            });
+        });
+    });
+
+
+
+
+
 
 });

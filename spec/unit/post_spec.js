@@ -123,7 +123,7 @@ describe("Post", () => {
    
     });
    
-      describe("#getUser()", () => {
+    describe("#getUser()", () => {
         it("should return the associated topic", (done) => {
             this.post.getUser()
             .then((associatedUser) => {
