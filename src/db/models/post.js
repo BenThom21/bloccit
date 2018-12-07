@@ -61,8 +61,16 @@ module.exports = (sequelize, DataTypes) => {
 
   Post.addScope("lastFiveFor", (userId) => {
     return {
-      where: { userId: userId},
+      where: {userId: userId},
       limit: 5,
+      order: [["createdAt", "DESC"]]
+    }
+  });
+
+  //assignment 16
+  Post.addScope("allFavorites", (userId) => {
+    return {
+      where: {userId: userId},
       order: [["createdAt", "DESC"]]
     }
   });
