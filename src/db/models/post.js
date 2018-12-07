@@ -59,5 +59,14 @@ module.exports = (sequelize, DataTypes) => {
     });
   });
 
+  //assignemtn 15
+  Post.afterCreate((post, callback) => {
+    return models.Vote.create({
+      value: 1,
+      userId: this.user.id,
+      postId: this.post.id
+    });
+  });
+
   return Post;
 };
