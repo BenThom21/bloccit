@@ -17,6 +17,7 @@ module.exports = {
             if(err) {
                 req.flash("error", err);
                 res.redirect("/users/sign_up");
+                console.log(err);
             } else {
                 passport.authenticate("local")(req, res, () => {
                 req.flash("notice", "You've successfully signed in!");
