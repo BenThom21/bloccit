@@ -13,7 +13,7 @@ module.exports = {
             } else {
                 res.render("topics/index", {topics});
             }
-            console.log(topics);
+            // console.log(topics);
         })
     },
 
