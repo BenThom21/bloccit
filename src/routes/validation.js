@@ -12,6 +12,7 @@ module.exports = {
         console.log(errors);
 
         if (errors) {
+            console.log(errors);
             req.flash("error", errors);
             return res.redirect(303, req.headers.referer)
         } else {
