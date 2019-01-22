@@ -5,15 +5,18 @@ const Authorizer = require("../policies/post");
 
 module.exports = {
 
-    new(req, res, next) {
-        const authorized = new Authorizer(req.user).new();
+    // new(req, res, next) {
+    //     const authorized = new Authorizer(req.user).new();
     
-        if(authorized) {
-            res.render("posts/new");
-        } else {
-            req.flash("notice", "You are not authorized to do that.");
-            res.redirect("/posts");
-        }
+    //     if(authorized) {
+    //         res.render("posts/new");
+    //     } else {
+    //         req.flash("notice", "You are not authorized to do that.");
+    //         res.redirect("/posts");
+    //     }
+    // },
+    new(req, res, next) {
+        res.render("posts/new", {topicId: req.params.topicId});
     },
 
     create(req, res, next) {
