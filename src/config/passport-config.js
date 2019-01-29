@@ -6,7 +6,7 @@ const authHelper = require("../auth/helpers");
 
 
 module.exports = {
-    init(app){
+    init(app) {
         app.use(passport.initialize());
         app.use(passport.session());
 
@@ -34,7 +34,7 @@ module.exports = {
             .then((user) => {
                 callback(null, user);
             })
-            .catch((err =>{
+            .catch((err => {
                 callback(err, user);
             }))
         });

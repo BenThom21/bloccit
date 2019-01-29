@@ -190,7 +190,7 @@ describe("routes : posts", () => {
                     done();
                 }
                 );
-            });
+            // });
            
             //now passing
             describe("GET /topics/:topicId/posts/new", () => {
@@ -308,7 +308,7 @@ describe("routes : posts", () => {
 
         });
 
-    });
+    // });
 
     // //now passing
     // describe("GET /topics/:topicId/posts/new", () => {

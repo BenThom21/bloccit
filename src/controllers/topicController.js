@@ -23,7 +23,7 @@ module.exports = {
 
     //checkpoint 12 - it didn't say to get rid of the old 'new' functionality, I can see this causing issues
     //going to comment out the older 'new' for now
-    new(req, res, next){
+    new(req, res, next) {
         const authorized = new Authorizer(req.user).new();
     
         if(authorized) {
@@ -41,6 +41,10 @@ module.exports = {
             let newTopic = {
                 title: req.body.title,
                 description: req.body.description
+                // HELP: is the below needed to pass topicId???
+                // description: req.body.description,
+                // topicId: req.params.topicId,
+                // userId: req.user.id
             };
             topicQueries.addTopic(newTopic, (err, topic) => {
                 if(err){
@@ -57,7 +61,8 @@ module.exports = {
 
     show(req, res, next) {
         topicQueries.getTopic(req.params.id, (err, topic) => {
-            if(err || topic==null) {
+            if(err || topic == null) {
+                console.log(err);
                 res.redirect(404, "/");
             } else {
                 res.render("topics/show", {topic});
