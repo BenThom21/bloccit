@@ -34,7 +34,7 @@ module.exports = {
         }
     },
 
-    create(req, res, next){
+    create(req, res, next) {
         const authorized = new Authorizer(req.user).create();
 
         if(authorized) {
@@ -47,7 +47,8 @@ module.exports = {
                 // userId: req.user.id
             };
             topicQueries.addTopic(newTopic, (err, topic) => {
-                if(err){
+                if(err) {
+                    console.log(err);
                     res.redirect(500, "topics/new");
                 } else {
                     res.redirect(303, `/topics/${topic.id}`);

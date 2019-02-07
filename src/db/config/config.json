@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "benthompson",
     "password": null,
     "database": "bloccit-dev",
     "host": "127.0.0.1",

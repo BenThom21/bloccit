@@ -32,6 +32,7 @@ module.exports = {
             postQueries.addPost(newPost, (err, post) => {
                 if(err) {
                     res.redirect(500, "posts/new");
+                    console.log(err);
                 } else {
                     //assignment 12 - is post.id right here?
                     res.redirect(303, `/posts/${post.id}`);
